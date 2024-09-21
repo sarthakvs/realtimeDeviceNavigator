@@ -18,9 +18,12 @@ io.on("connection",function(socket){
     socket.on("disconnect",function(){
         io.emit("user-disconnected",socket.id);
     });
-})
+});
 
 app.get("/",function(req,res){
     res.render("index");
 });
-server.listen(3000);
+const port = process.env.PORT || 3000;
+server.listen(port, () => {
+    console.log(`Server connected on port ${port}`);
+});
