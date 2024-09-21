@@ -12,19 +12,10 @@ if(navigator.geolocation){
         { 
             enableHighAccuracy: true,
             maximumAge: 0,
-            timeout: 2000
+            timeout: 100
         }
     );
 }
-socket.on("first-time", (users) => {
-    Object.entries(users).forEach(([id, { latitude, longitude }]) => {
-        if (markers[id]) {
-            markers[id].setLatLng([latitude, longitude]);
-        } else {
-            markers[id] = L.marker([latitude, longitude]).addTo(map);
-        }
-    });
-});
 const map = L.map("map").setView([0,0],16);
 L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{
     attribution:"by github.com/sarthakvs"
