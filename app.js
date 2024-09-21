@@ -6,11 +6,12 @@ const server = http.createServer(app);
 const socketio = require("socket.io");
 const io = socketio(server);
 
-
+const users = {}; 
 app.set("view engine","ejs");
 app.use(express.static(path.join(__dirname,"public")));
 
 io.on("connection",function(socket){
+    socket.emit("first-time", users);
     socket.on("send-location",function(data){
         io.emit("receive-location",{id: socket.id, ...data});
     });
